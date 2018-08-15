@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 let IP = process.env.IP || 'localhost';
 let PORT = process.env.PORT || 3000;
 
+
 // prepare server
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static(__dirname + '/www')); // redirect root
@@ -38,6 +39,13 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.post('/update', function(req, res) {
+  let getBody = req.body
+  Auth.updateDataIndex(getBody).then(() => {
+    res.redirect('/dashboard')
+  })
+});
+
 app.get('/', function(req, res){
     Auth.retrieveDataFromIndex().then((snapshot) => {
         res.render('index', {snapshot: snapshot});
@@ -55,7 +63,9 @@ app.get('/logout', function(req, res){
 
 app.get('/dashboard', function(req, res){
     if(userLogged){
-    res.render('dashboard', {user: userLogged});
+      Auth.retrieveDataFromIndex().then((snapshot) => {
+          res.render('dashboard', {user: userLogged, snapshot: snapshot});
+      })
     }else{
     res.redirect('/')
     }

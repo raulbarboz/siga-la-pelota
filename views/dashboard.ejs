@@ -4,6 +4,43 @@
 <%- include('partials/subnav') %>
 
 <body class="bg-light">
+    
+    <div class="container">
+        <div class="jumbotron mt-4">
+          <h1 class="display-4">Olá, <%= locals.user.email %></h1>
+          <p class="lead">Bem-vindo ao Dashboard do bloco <span class="text-danger">Siga La Pelota</span></p>
+          <hr class="my-4">
+          <p>É possível gerenciar o conteúdo, comentários, criar usuários, excluir usuários e gerenciar o seu perfil</p>
+          <a class="btn btn-primary btn-lg" href="/logout" role="button">Sair</a>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/update" method="POST">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Descrição</span>
+                      </div>
+                      <textarea rows="15" class="form-control" name="description" aria-label="With textarea"><%= locals.snapshot.description %></textarea>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                    <div class="input-group input-group-lg mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Aviso:</span>
+                      </div>
+                      <input name="warnings" value="<%= locals.snapshot.warnings %>" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    </div>
+                    <div class="input-group input-group-lg mb-2">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Data:</span>
+                      </div>
+                      <input name="date" value="<%= locals.snapshot.date %>" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    </div>
+                    <button type="submit" class="btn btn-outline-danger btn-block">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">

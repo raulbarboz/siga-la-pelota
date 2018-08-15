@@ -52,6 +52,13 @@ module.exports.SignInWithEmailAndPassword = (email, password) => {
         });
 }
 
+module.exports.updateDataIndex = (data) => {
+  return firebase.database().ref('dataIndex').set({
+    description: data.description,
+    warnings: data.warnings,
+    date: data.date
+  })
+}
 
 module.exports.UserId = () => {
 
