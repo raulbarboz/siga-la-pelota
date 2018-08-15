@@ -1,0 +1,38 @@
+
+ <%- include('partials/header') %>
+  <%- include('partials/navbar') %>
+
+<body>
+    <div class="video-background">
+    <div class="video-foreground">
+      <% if (sound === true) { %>
+      <iframe id="myVideo" width="1280" height="720" src="https://www.youtube.com/embed/kP6wKK4zgXI?hd=1&vq=hd1080&controls=0&showinfo=0&rel=0&autoplay=1&loop=1&list=PLEETu0t0PAax1I0OJEiFwMxKkKcoJqsfg" frameborder="0" allowfullscreen></iframe>
+      <% } else { %>
+      <iframe id="myVideo" width="1280" height="720" src="https://www.youtube.com/embed/kP6wKK4zgXI?hd=1&vq=hd1080&mute=1&controls=0&showinfo=0&rel=0&autoplay=1&loop=1&list=PLEETu0t0PAax1I0OJEiFwMxKkKcoJqsfg" frameborder="0" allowfullscreen></iframe>
+      <% } %>
+    </div>
+  </div>
+
+<div id="vidtop-content">
+<div class="vid-info">
+	  <h1>Bloco Siga La Pelota</h1>
+	  <% if (snapshot.description) { %>
+	  <p><%= snapshot.description %></p>
+	  <% } %>
+      <% if (snapshot.warnings) { %>
+	  <p>Aviso aos navegantes: <%= snapshot.warnings %></p>
+	  <% } %>
+      <% if (snapshot.date) { %>
+	  <p>Data e horário: <%= snapshot.date %></p>
+	  <% } %>
+<p>2019
+  </div>
+</div>
+</body>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/style/style.css">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</html>
