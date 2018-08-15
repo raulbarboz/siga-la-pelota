@@ -21,7 +21,7 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form action="/login" method="post" class="form-inline my-2 my-lg-0">
       <!-- Button trigger modal -->
 
         <%= locals.user %>
@@ -31,7 +31,7 @@
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
           Admin
         </button>
-        
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -43,7 +43,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form>
+
                   <div class="form-group col-md-6">
                    <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="@email">
@@ -56,13 +56,12 @@
                     <button type="submit" class="btn btn-primary">Logar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                   </div>
-                </form>
+              
               </div>
-        
+
             </div>
           </div>
         </div>
     </form>
   </div>
 </nav>
-

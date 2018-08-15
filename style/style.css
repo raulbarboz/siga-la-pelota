@@ -34,3 +34,6 @@
 @media all and (max-width: 500px) {
 .vid-info .acronym { display: none; }
 }
+.nav-scroller{
+  margin-top:57px;
+}

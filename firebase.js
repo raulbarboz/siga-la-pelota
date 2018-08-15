@@ -29,7 +29,7 @@ module.exports.SignUpWithEmailAndPassword = (email, password) => {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/weak-password') {
-        return 'The password is too weak.'
+        return {err: 'The password is too weak.'}
     } else {
       return {err: errorMessage }
     }
@@ -38,18 +38,18 @@ module.exports.SignUpWithEmailAndPassword = (email, password) => {
 }
 
 module.exports.SignInWithEmailAndPassword = (email, password) => {
- firebase.auth().signInWithEmailAndPassword(email, password)
+ return firebase.auth().signInWithEmailAndPassword(email, password)
         .catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
           if (errorCode === 'auth/wrong-password') {
-            console.log('Wrong password.');
+            return {err: 'Wrong password.'}
           } else {
-            console.log(errorMessage);
+            return {err: errorMessage}
           }
-          console.log(error);
-        });   
+          return {err: error}
+        });
 }
 
 
