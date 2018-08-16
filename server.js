@@ -53,6 +53,12 @@ app.get('/', function(req, res){
     })
 });
 
+app.get('/comentarios', function(req, res){
+    Auth.retrieveDataFromIndex().then((snapshot) => {
+        res.render('comentarios', {snapshot: snapshot});
+    })
+});
+
 app.get('/logout', function(req, res){
     firebase.auth().signOut().then(function() {
       console.log('logout');
@@ -82,7 +88,18 @@ app.get('/useradmin', (req, res) => {
       res.redirect('/')
     }
 })
-// Auth.SignUpWithEmailAndPassword('ruzito@gmail.com','raulSCL123#').then((user) => {
+
+app.get('/user/:id', (req, res) => {
+    if(userLogged){
+      Auth.getUserDataById(req.params.id)
+      .then((snapshot) => {
+        res.render('userid', {user: userLogged, snapshot: snapshot})
+      })
+    }else{
+      res.redirect('/')
+    }
+})
+// Auth.SignUpWithEmailAndPassword('raul.barboza@gmail.com','raulSCL123#').then((user) => {
 //     if(!user.err){
 //        let userData = JSON.parse(user)
 //        userData = userData.user

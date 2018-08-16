@@ -74,9 +74,25 @@ module.exports.insertUserData = (user) => {
 module.exports.getUserData = (user) => {
   return firebase.database().ref('users').once('value')
   .then((snapshot) => {
-    return snapshot.val()
+    let userArray = []
+    snapshot.forEach((childSnapshot) => {
+      userArray.push({
+        id: childSnapshot.key,
+        isAdmin: childSnapshot.val().isAdmin,
+        userEmail: childSnapshot.val().userEmail
+      })
+    })
+    return userArray
   })
 }
+
+module.exports.getUserDataById = (id) => {
+  return firebase.database().ref(`users/${id}`).once('value')
+  .then((snapshot) => {
+    return snapshot.val();
+  })
+}
+
 
 
 return module.exports

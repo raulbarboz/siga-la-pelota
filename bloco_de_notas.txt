@@ -1,0 +1,23 @@
+// adicionar
+
+parte de admin {
+    criar usuario
+    deletar usuario
+    editar usuario
+    deletar usuario admin
+    revogar usuario admin
+}
+
+parte de comentarios {
+    sessao de comentarios
+    sessao de admin de comentarios
+    aprovacao
+    exclusao
+    botao like de comentarios por ip
+}
+
+enquete de musicas {
+    qual musicas gostou mais
+    quais deveriam ser inclusas
+    o que deveriamos melhorar
+}

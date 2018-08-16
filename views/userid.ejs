@@ -7,19 +7,19 @@
     
     <div class="container">
         <div class="jumbotron mt-4">
-          <h1 class="display-4">Usuários</h1>
+          <h1 class="display-4">Editar Usuário</h1>
           <hr class="my-4">
           <p>Usuários - Adicionar, Deletar, Alterar</p>
         </div>
-        <% locals.snapshot.map((snap) => { %>
-        <a href="user/<%= snap.id %>" class="media mb-3 usersSiga">
-            <img class="mr-3 img-thumbnail rounded imgSiga" src="img/sigalapelota.png" alt="avatar">
+       
+        <div class="media mb-3 usersSiga">
+            <img class="mr-3 img-thumbnail rounded imgSiga" src="../img/sigalapelota.png" alt="avatar">
             <div class="media-body">
-              <h5 class="mt-0"><%= snap.userEmail %></h5>
+              <h5 class="mt-0"><%= locals.snapshot.userEmail %></h5>
               descricao
             </div>
-        </a>
-        <% }) %>
+        </div>
+       
     </div>
 </body>
 
