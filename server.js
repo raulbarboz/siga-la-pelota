@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const ejs = require('ejs');
 require('dotenv').config();
 const firebase = require('firebase');
@@ -54,17 +56,23 @@ app.get('/', function(req, res){
 });
 
 app.get('/comentarios', function(req, res){
-    Auth.retrieveDataFromIndex().then((snapshot) => {
-        res.render('comentarios', {snapshot: snapshot});
+    Auth.getMessage().then((messageArrays) => {
+        res.render('comentarios', {message: messageArrays.msgArrayApproved});
+    })
+});
+
+app.get('/notifications', function(req, res){
+    Auth.getMessage().then((messageArrays) => {
+        res.render('notifications', {message: messageArrays.msgArray, messageApproved: messageArrays.msgArrayApproved});
     })
 });
 
 app.get('/logout', function(req, res){
     firebase.auth().signOut().then(function() {
-      console.log('logout');
+      
       res.redirect('/')
     }).catch(function(error) {
-      // An error happened.
+      return error
     });
 });
 
@@ -109,6 +117,12 @@ app.get('/user/:id', (req, res) => {
 //     }
 // })
 
-app.listen(PORT, IP, function(){
+io.on('connection', function(socket){
+   socket.on('sent message', function(msg){
+    Auth.insertMessage(msg)
+  });
+});
+
+http.listen(PORT, IP, function(){
     console.log(`App running on http://${IP}:${PORT}`);
 });

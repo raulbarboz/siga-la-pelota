@@ -1,0 +1,65 @@
+
+<%- include('partials/header') %>
+<%- include('partials/navdash') %>
+<%- include('partials/subnav') %>
+
+<body class="bg-light">
+    
+    <div class="container">
+        <div class="jumbotron mt-4">
+          <h1 class="display-4">Mensagens</h1>
+          <hr class="my-4">
+          <p>Mensagens - Adicionar, Deletar, Alterar</p>
+        </div>
+        
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Comentário</th>
+              <th scope="col">Aprovar</th>
+              <th scope="col">Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% locals.message.map((snap, index) => { %>
+                <tr class="table-danger">
+                  <th scope="row"><%= index %></th>
+                  <td><%= snap.message %></td>
+                  <td><a href="/approve/<%= snap.id %>">Aprovar</a></td>
+                  <td><a href="/delete/<%= snap.id %>">Deletar</a></td>
+                </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <table class="table table-hover mt-5">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Comentário</th>
+              <th scope="col">Aprovar</th>
+              <th scope="col">Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% locals.messageApproved.map((snap, index) => { %>
+                <tr class="table-success">
+                  <th scope="row"><%= index %></th>
+                  <td><%= snap.message %></td>
+                  <td><span class="text-black-50">Aprovado</span></td>
+                  <td><a href="/delete/<%= snap.id %>">Deletar</a></td>
+                </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        
+        
+
+    </div>
+</body>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</html>

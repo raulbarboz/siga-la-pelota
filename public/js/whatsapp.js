@@ -1,5 +1,5 @@
 
-
+var socket = io();
 var deviceTime = document.querySelector('.status-bar .time');
 var messageTime = document.querySelectorAll('.message .time');
 
@@ -15,7 +15,8 @@ function newMessage(e) {
 	var input = e.target.input;
 
 	if (input.value) {
-		var message = buildMessage(input.value);
+		socket.emit('sent message', input.value);
+		var message = buildMessage('mensagem enviada para aprovação');
 		conversation.appendChild(message);
 		animateMessage(message);
 	}

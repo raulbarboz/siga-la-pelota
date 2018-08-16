@@ -93,6 +93,36 @@ module.exports.getUserDataById = (id) => {
   })
 }
 
+module.exports.insertMessage = (msg) => {
+  firebase.database().ref('mensagens').push({
+    message: msg,
+    approved: false
+  })
+}
 
+module.exports.getMessage = () => {
+  return firebase.database().ref('mensagens').once('value')
+  .then((snapshot) => {
+    let msgArray = []
+    let msgArrayApproved = []
+    snapshot.forEach((childSnapshot) => {
+      if(childSnapshot.val().approved === true){
+        msgArrayApproved.push({
+          id: childSnapshot.key,
+          message: childSnapshot.val().message,
+          approved: childSnapshot.val().approved
+        })
+      }else{
+        msgArray.push({
+          id: childSnapshot.key,
+          message: childSnapshot.val().message,
+          approved: childSnapshot.val().approved
+        })
+      }
+
+    })
+    return {msgArray, msgArrayApproved}
+  })
+}
 
 return module.exports
