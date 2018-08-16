@@ -8,9 +8,10 @@ const bodyParser = require('body-parser')
 let IP = process.env.IP || 'localhost';
 let PORT = process.env.PORT || 3000;
 
-
+var publicDir = require('path').join(__dirname,'/public');
 // prepare server
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(publicDir));
 app.use('/', express.static(__dirname + '/www')); // redirect root
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
@@ -71,6 +72,16 @@ app.get('/dashboard', function(req, res){
     }
 });
 
+app.get('/useradmin', (req, res) => {
+    if(userLogged){
+      Auth.getUserData()
+      .then((snapshot) => {
+        res.render('useradmin', {user: userLogged, snapshot: snapshot})
+      })
+    }else{
+      res.redirect('/')
+    }
+})
 // Auth.SignUpWithEmailAndPassword('ruzito@gmail.com','raulSCL123#').then((user) => {
 //     if(!user.err){
 //        let userData = JSON.parse(user)

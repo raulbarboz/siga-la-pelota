@@ -71,5 +71,12 @@ module.exports.insertUserData = (user) => {
   })
 }
 
+module.exports.getUserData = (user) => {
+  return firebase.database().ref('users').once('value')
+  .then((snapshot) => {
+    return snapshot.val()
+  })
+}
+
 
 return module.exports
