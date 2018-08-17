@@ -110,11 +110,22 @@ module.exports.updateUserDataById = (id, userUpdate) => {
 }
 
 module.exports.insertMessage = (msg) => {
-  firebase.database().ref('mensagens').push({
+  return firebase.database().ref('mensagens').push({
     message: msg,
     approved: false
   })
 }
+
+module.exports.approveMessage = (id) => {
+  return firebase.database().ref(`mensagens/${id}`).update({
+    approved: true
+  })
+}
+
+module.exports.deleteMessage = (id) => {
+  return firebase.database().ref(`mensagens/${id}`).remove()
+}
+
 
 module.exports.getMessage = () => {
   return firebase.database().ref('mensagens').once('value')

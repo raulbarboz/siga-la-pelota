@@ -120,6 +120,28 @@ app.get('/deluser/:id', (req, res) => {
     }
 })
 
+app.get('/delete/:id', (req, res) => {
+    if(userLogged){
+      Auth.deleteMessage(req.params.id)
+      .then(() => {
+        res.redirect('/notifications')
+      })
+    }else{
+      res.redirect('/')
+    }
+})
+
+app.get('/approve/:id', (req, res) => {
+    if(userLogged){
+      Auth.approveMessage(req.params.id)
+      .then(() => {
+        res.redirect('/notifications')
+      })
+    }else{
+      res.redirect('/')
+    }
+})
+
 app.post('/user/update/:id', (req, res) => {
     const userUpdate = {
       name: req.body.name,
@@ -138,7 +160,11 @@ app.post('/user/update/:id', (req, res) => {
 })
 
 app.get('/createuser', (req, res) => {
-  res.render('createuser')
+  if(userLogged){
+    res.render('createuser')
+  } else {
+    res.redirect('/')
+  }
 })
 
 app.post('/createuser', (req, res) => {
@@ -155,6 +181,21 @@ app.post('/createuser', (req, res) => {
  })
 })
 
+app.get('/alterar', (req, res) => {
+  if(userLogged){
+    res.render('alterar')
+  } else {
+    res.redirect('/')
+  }
+})
+
+app.get('/excluir', (req, res) => {
+  if(userLogged){
+    res.render('excluir')
+  } else {
+    res.redirect('/')
+  }
+})
 
 io.on('connection', function(socket){
    socket.on('sent message', function(msg){
