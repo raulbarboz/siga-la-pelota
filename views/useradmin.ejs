@@ -1,7 +1,6 @@
 
 <%- include('partials/header') %>
 <%- include('partials/navdash') %>
-<%- include('partials/subnav') %>
 
 <body class="bg-light">
     
@@ -11,16 +10,24 @@
           <hr class="my-4">
           <p>Usuários - Adicionar, Deletar, Alterar</p>
         </div>
-        <% locals.snapshot.map((snap) => { %>
-        <a href="user/<%= snap.id %>" class="media mb-3 usersSiga">
-            <img class="mr-3 img-thumbnail rounded imgSiga" src="img/sigalapelota.png" alt="avatar">
-            <div class="media-body">
-              <h5 class="mt-0"><%= snap.userEmail %></h5>
-              <h6><%= snap.name %></h6>
-              <h6><%= snap.lastName %></h6>
-            </div>
-        </a>
-        <% }) %>
+
+ 
+                <% locals.snapshot.map((snap) => { %>
+                <div class="media mb-3 usersSiga">
+                    
+                    <img onclick="window.location.href='/user/<%= snap.id %>'" class="mr-3 img-thumbnail rounded imgSiga" src="img/sigalapelota.png" alt="avatar">
+                    <div onclick="window.location.href='/user/<%= snap.id %>'" class="media-body">
+                      <h5 class="mt-0"><%= snap.userEmail %></h5>
+                      <h6><%= snap.name %></h6>
+                      <h6><%= snap.lastName %></h6>
+                    </div>
+                   
+                    <i onclick="" class="trash fas fa-trash-alt mt-1 mr-1 disable"></i>
+                </div>
+                
+                <% }) %>
+                <a href="/createuser" class="btn btn-primary">Novo usuário</a>
+
     </div>
 </body>
 

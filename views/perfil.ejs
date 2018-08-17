@@ -24,6 +24,12 @@
                     </div>
                     <input name="lastName" value="<%= locals.snapshot.lastName  %>" type="text" aria-label="Last name" class="form-control">
             </div>
+            <div class="input-group mb-3">
+                    <input name="email" value="<%= locals.snapshot.userEmail  %>" type="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="basic-addon2">@email.com</span>
+                    </div>
+            </div>
             <button type="submit" class="btn btn-outline-danger btn-block">Atualizar</button>
         </form>
     </div>

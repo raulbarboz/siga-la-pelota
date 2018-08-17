@@ -65,7 +65,7 @@ module.exports.UserId = () => {
 }
 
 module.exports.insertUserData = (user) => {
-  firebase.database().ref(`users/${user.uid}`).set({
+  return firebase.database().ref(`users/${user.uid}`).set({
     userEmail: user.email,
     name: 'nome',
     lastName: 'sobrenome',
@@ -94,6 +94,18 @@ module.exports.getUserDataById = (id) => {
   return firebase.database().ref(`users/${id}`).once('value')
   .then((snapshot) => {
     return snapshot.val();
+  })
+}
+
+module.exports.delUserDataById = (id) => {
+  return firebase.database().ref(`users/${id}`).remove()
+}
+
+
+module.exports.updateUserDataById = (id, userUpdate) => {
+  return firebase.database().ref(`users/${id}`).update({
+    name: userUpdate.name,
+    lastName: userUpdate.lastName
   })
 }
 

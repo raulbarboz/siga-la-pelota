@@ -102,21 +102,59 @@ app.get('/user/:id', (req, res) => {
     if(userLogged){
       Auth.getUserDataById(req.params.id)
       .then((snapshot) => {
-        res.render('userid', {user: userLogged, snapshot: snapshot})
+        res.render('userid', {user: userLogged, snapshot: snapshot, id: req.params.id})
       })
     }else{
       res.redirect('/')
     }
 })
-// Auth.SignUpWithEmailAndPassword('ruzito@gmail.com','pasword').then((user) => {
-//     if(!user.err){
-//        let userData = JSON.parse(user)
-//        userData = userData.user
-//        Auth.insertUserData(userData)
-//     }else{
-//         console.log(user.err)
-//     }
-// })
+
+app.get('/deluser/:id', (req, res) => {
+    if(userLogged){
+      Auth.delUserDataById(req.params.id)
+      .then((snapshot) => {
+        res.render('userid', {user: userLogged, snapshot: snapshot, id: req.params.id})
+      })
+    }else{
+      res.redirect('/')
+    }
+})
+
+app.post('/user/update/:id', (req, res) => {
+    const userUpdate = {
+      name: req.body.name,
+      lastName: req.body.lastName
+    }
+    if(userLogged){
+      Auth.updateUserDataById(req.params.id, userUpdate)
+      .then(() => {
+        if(userLogged.email != userUpdate.email){
+        }
+        res.redirect('/useradmin')
+      })
+    }else{
+      res.redirect('/')
+    }
+})
+
+app.get('/createuser', (req, res) => {
+  res.render('createuser')
+})
+
+app.post('/createuser', (req, res) => {
+  Auth.SignUpWithEmailAndPassword(req.body.email,req.body.password).then((user) => {
+     if(!user.err){
+        let userData = JSON.parse(user)
+        userData = userData.user
+        Auth.insertUserData(userData).then(() => {
+          res.redirect('/useradmin')
+        })
+     }else{
+        return user.err
+     }
+ })
+})
+
 
 io.on('connection', function(socket){
    socket.on('sent message', function(msg){

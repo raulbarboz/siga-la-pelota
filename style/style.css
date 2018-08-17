@@ -490,3 +490,7 @@ body {
     height: calc(100vh - 120px);
   }
 }
+
+.trash:hover{
+  color: green
+}
