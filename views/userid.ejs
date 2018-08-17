@@ -11,15 +11,27 @@
           <hr class="my-4">
           <p>Usuários - Adicionar, Deletar, Alterar</p>
         </div>
-       
-        <div class="media mb-3 usersSiga">
-            <img class="mr-3 img-thumbnail rounded imgSiga" src="../img/sigalapelota.png" alt="avatar">
-            <div class="media-body">
-              <h5 class="mt-0"><%= locals.snapshot.userEmail %></h5>
-              descricao
+        <form action="/user/update/<%= locals.snapshot.id  %>" method="POST">        
+           <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text">Nome</span>
+                </div>
+                <input name="name" value="<%= locals.snapshot.name  %>" type="text" aria-label="First name" class="form-control">
             </div>
-        </div>
-       
+            <div class="input-group">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">Sobrenome</span>
+                    </div>
+                    <input name="lastName" value="<%= locals.snapshot.lastName  %>" type="text" aria-label="Last name" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+                    <input name="email" value="<%= locals.snapshot.userEmail  %>" type="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="basic-addon2">@email.com</span>
+                    </div>
+            </div>
+            <button type="submit" class="btn btn-outline-danger btn-block">Atualizar</button>
+        </form>
     </div>
 </body>
 

@@ -67,7 +67,9 @@ module.exports.UserId = () => {
 module.exports.insertUserData = (user) => {
   firebase.database().ref(`users/${user.uid}`).set({
     userEmail: user.email,
-    isAdmin: true
+    name: 'nome',
+    lastName: 'sobrenome',
+    isAdmin: false
   })
 }
 
@@ -79,7 +81,9 @@ module.exports.getUserData = (user) => {
       userArray.push({
         id: childSnapshot.key,
         isAdmin: childSnapshot.val().isAdmin,
-        userEmail: childSnapshot.val().userEmail
+        userEmail: childSnapshot.val().userEmail,
+        name: childSnapshot.val().name,
+        lastName: childSnapshot.val().lastName
       })
     })
     return userArray

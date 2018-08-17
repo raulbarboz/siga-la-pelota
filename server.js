@@ -69,7 +69,6 @@ app.get('/notifications', function(req, res){
 
 app.get('/logout', function(req, res){
     firebase.auth().signOut().then(function() {
-      
       res.redirect('/')
     }).catch(function(error) {
       return error
@@ -79,7 +78,9 @@ app.get('/logout', function(req, res){
 app.get('/dashboard', function(req, res){
     if(userLogged){
       Auth.retrieveDataFromIndex().then((snapshot) => {
-          res.render('dashboard', {user: userLogged, snapshot: snapshot});
+          Auth.getUserDataById(userLogged.uid).then((user) => {
+            res.render('dashboard', {user: user, snapshot: snapshot});
+          })
       })
     }else{
     res.redirect('/')
@@ -107,7 +108,7 @@ app.get('/user/:id', (req, res) => {
       res.redirect('/')
     }
 })
-// Auth.SignUpWithEmailAndPassword('raul.barboza@gmail.com','raulSCL123#').then((user) => {
+// Auth.SignUpWithEmailAndPassword('ruzito@gmail.com','pasword').then((user) => {
 //     if(!user.err){
 //        let userData = JSON.parse(user)
 //        userData = userData.user
