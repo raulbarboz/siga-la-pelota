@@ -7,8 +7,8 @@ require('dotenv').config();
 const firebase = require('firebase');
 const Auth = require('./firebase.js');
 const bodyParser = require('body-parser')
-let IP = process.env.IP || 'localhost';
-let PORT = process.env.PORT || 3000;
+//let IP = process.env.IP || 'localhost';
+let PORT = process.env.PORT || 8080;
 
 var publicDir = require('path').join(__dirname,'/public');
 // prepare server
@@ -226,6 +226,6 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(PORT, IP, function(){
-    console.log(`App running on http://${IP}:${PORT}`);
+http.listen(PORT, function(){
+    
 });
