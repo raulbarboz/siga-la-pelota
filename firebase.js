@@ -148,6 +148,10 @@ module.exports.deleteAccount = () => {
   });
 }
 
+module.exports.deleteUser = (id) => {
+    return firebase.database().ref(`users/${id}`).remove()
+}
+
 module.exports.getMessage = () => {
   return firebase.database().ref('mensagens').once('value')
   .then((snapshot) => {

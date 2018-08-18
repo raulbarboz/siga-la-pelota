@@ -201,8 +201,10 @@ app.post('/alterar', (req, res) => {
 
 app.post('/excluir', (req, res) => {
   if(userLogged){
-    Auth.deleteAccount().then((status) => {
-      res.redirect('/')
+    Auth.deleteUser(userLogged.uid).then((status) => {
+      Auth.deleteAccount().then((status) => {
+        res.redirect('/')
+      })
     })
   } else {
     res.render('deletar', {msg: 'algo deu errado'})
