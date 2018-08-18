@@ -189,6 +189,27 @@ app.get('/alterar', (req, res) => {
   }
 })
 
+app.post('/alterar', (req, res) => {
+  if(userLogged && req.body.newPassword.length > 0){
+    Auth.updatePassword(req.body.newPassword).then((status) => {
+      res.render('alterar', {msg: status})
+    })
+  } else {
+    res.render('alterar', {msg: 'senha inválida'})
+  }
+})
+
+app.post('/excluir', (req, res) => {
+  if(userLogged){
+    Auth.deleteAccount().then((status) => {
+      res.redirect('/')
+    })
+  } else {
+    res.render('deletar', {msg: 'algo deu errado'})
+  }
+})
+
+
 app.get('/excluir', (req, res) => {
   if(userLogged){
     res.render('excluir')

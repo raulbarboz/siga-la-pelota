@@ -126,6 +126,27 @@ module.exports.deleteMessage = (id) => {
   return firebase.database().ref(`mensagens/${id}`).remove()
 }
 
+module.exports.updatePassword = (newPassword) => {
+  var user = firebase.auth().currentUser;
+  return user.updatePassword(newPassword).then(function() {
+    // Update successful.
+    return 'alterada com sucesso'
+  }).catch(function(error) {
+    // An error happened.
+    return error
+  });
+}
+
+module.exports.deleteAccount = () => {
+  var user = firebase.auth().currentUser;
+  return user.delete().then(function() {
+    // User deleted.
+    return 'user deleted'
+  }).catch(function(error) {
+    // An error happened.
+    return error
+  });
+}
 
 module.exports.getMessage = () => {
   return firebase.database().ref('mensagens').once('value')
