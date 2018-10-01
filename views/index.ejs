@@ -6,9 +6,11 @@
     <div class="warning"><%= locals.err %></div>
     <div class="video-background">
     <div class="video-foreground">
-
+      <% if (device === 'DESKTOP'){ %>
       <iframe id="myVideo" width="1280" height="720" src="https://www.youtube.com/embed/kP6wKK4zgXI?hd=1&vq=hd1080&mute=1&controls=0&showinfo=0&rel=0&autoplay=1&loop=1&list=PLEETu0t0PAax1I0OJEiFwMxKkKcoJqsfg" frameborder="0" allowfullscreen></iframe>
-
+      <% }else{ %>
+      <img id="myVideo" src="img/bk.jpg">
+      <% } %>
     </div>
   </div>
 

@@ -6,9 +6,13 @@ const ejs = require('ejs');
 require('dotenv').config();
 const firebase = require('firebase');
 const Auth = require('./firebase.js');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+var device = require('express-device');
+app.use(device.capture());
+
 //let IP = process.env.IP || 'localhost';
 let PORT = process.env.PORT || 8080;
+
 
 var publicDir = require('path').join(__dirname,'/public');
 // prepare server
@@ -51,7 +55,7 @@ app.post('/update', function(req, res) {
 
 app.get('/', function(req, res){
     Auth.retrieveDataFromIndex().then((snapshot) => {
-        res.render('index', {snapshot: snapshot});
+        res.render('index', {snapshot: snapshot, device: req.device.type.toUpperCase()});
     })
 });
 
