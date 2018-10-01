@@ -7,8 +7,8 @@ require('dotenv').config();
 const firebase = require('firebase');
 const Auth = require('./firebase.js');
 const bodyParser = require('body-parser')
-let IP = process.env.IP || 'localhost';
-let PORT = process.env.PORT || 3000;
+//let IP = process.env.IP || 'localhost';
+let PORT = process.env.PORT || 8080;
 
 var publicDir = require('path').join(__dirname,'/public');
 // prepare server
@@ -189,6 +189,29 @@ app.get('/alterar', (req, res) => {
   }
 })
 
+app.post('/alterar', (req, res) => {
+  if(userLogged && req.body.newPassword.length > 0){
+    Auth.updatePassword(req.body.newPassword).then((status) => {
+      res.render('alterar', {msg: status})
+    })
+  } else {
+    res.render('alterar', {msg: 'senha inválida'})
+  }
+})
+
+app.post('/excluir', (req, res) => {
+  if(userLogged){
+    Auth.deleteUser(userLogged.uid).then((status) => {
+      Auth.deleteAccount().then((status) => {
+        res.redirect('/')
+      })
+    })
+  } else {
+    res.render('deletar', {msg: 'algo deu errado'})
+  }
+})
+
+
 app.get('/excluir', (req, res) => {
   if(userLogged){
     res.render('excluir')
@@ -203,6 +226,6 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(PORT, IP, function(){
-    console.log(`App running on http://${IP}:${PORT}`);
+http.listen(PORT, function(){
+    
 });
