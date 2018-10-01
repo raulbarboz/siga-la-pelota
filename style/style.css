@@ -28,7 +28,7 @@
   .video-foreground { width: 300%; left: -100%; }
 }
 @media all and (max-width: 600px) {
-.vid-info { width: 50%; padding: .5rem; }
+.vid-info { width: 93%; padding: .5rem; font-size: 12px; }
 .vid-info h1 { margin-bottom: .2rem; }
 }
 @media all and (max-width: 500px) {
@@ -493,4 +493,8 @@ body {
 
 .trash:hover{
   color: green
+}
+
+.navbar{
+  z-index: 999999999;
 }
