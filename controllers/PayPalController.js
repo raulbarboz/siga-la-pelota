@@ -1,5 +1,6 @@
 const paypal = require('paypal-rest-sdk');
 const config = require('../paypal/config');
+const Auth = require('../firebase.js');
 const { HOST } = process.env;
 
 class PayPalController{
@@ -36,9 +37,14 @@ class PayPalController{
             if (error) {
                 res.status(error.httpStatusCode).send(error.response);
             } else {
+                const id = payment.id;
+                const amount = payment.transactions[0].amount.total;
                 const approval_url = payment.links;
                 const link = approval_url.find((link) => { return link.rel === 'approval_url' }).href
-                res.redirect(link)
+                Auth.insertPayment(id, amount).then(() => {
+                    res.redirect(link)
+                })
+                
             }
         });
     }
@@ -52,13 +58,14 @@ class PayPalController{
     
     confirm(req, res){
         const { paymentId, PayerID } = req.body;
-        console.log(paymentId)
-        console.log(PayerID)
         paypal.payment.execute(paymentId, { payer_id: PayerID }, (error, payment) => {
              if (error) {
                 res.status(error.httpStatusCode).send(error.response);
             } else {
-                res.render('pagamentoConcluido');
+                Auth.approvePayment(paymentId).then(() => {
+                    res.render('pagamentoConcluido');
+                })
+                
             }
         })
     }

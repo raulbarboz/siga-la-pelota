@@ -177,4 +177,33 @@ module.exports.getMessage = () => {
   })
 }
 
+module.exports.insertPayment = (id, amount) => {
+  return firebase.database().ref('payments').child(id).set({
+    amount,
+    approved: false
+  })
+}
+
+module.exports.approvePayment = (id) => {
+  return firebase.database().ref(`payments/${id}`).update({
+    approved: true
+  })
+}
+
+module.exports.getPayment = () => {
+  return firebase.database().ref('payments').once('value')
+  .then((snapshot) => {
+    let paymentArrayApproved = []
+    snapshot.forEach((childSnapshot) => {
+      if(childSnapshot.val().approved === true){
+        paymentArrayApproved.push({
+          amount: childSnapshot.val().amount.split('.')[0]
+       })
+      }
+
+    })
+    return paymentArrayApproved
+  })
+}
+
 return module.exports
