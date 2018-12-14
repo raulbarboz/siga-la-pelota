@@ -230,7 +230,8 @@ app.get('/excluir', (req, res) => {
 })
 
 app.get('/colabore', ColaboreController.request)
-app.get('/paypal', PayPalController.request)
+app.get('/paypal/:id', PayPalController.request)
+app.post('/confirmar', PayPalController.confirm)
 app.get('/cancel', PayPalController.cancel)
 app.get('/callback', PayPalController.callback)
 

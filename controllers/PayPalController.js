@@ -1,9 +1,37 @@
 const paypal = require('paypal-rest-sdk');
-const create_payment_json = require('../paypal/paypal.json')
 const config = require('../paypal/config');
+const { HOST } = process.env;
 
 class PayPalController{
     request(req, res){
+        const id = req.params.id;
+        let create_payment_json = {
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": `http://${HOST}/callback`,
+                "cancel_url": `http://${HOST}/cancel`
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": "Doação",
+                        "sku": "item",
+                        "price": `${id}.00`,
+                        "currency": "BRL",
+                        "quantity": 1
+                    }]
+                },
+                "amount": {
+                    "currency": "BRL",
+                    "total": `${id}.00`
+                },
+                "description": "Esta é uma doação para o bloco de carnaval de rua SigaLaPelota"
+            }]
+        };
+        
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
                 res.status(error.httpStatusCode).send(error.response);
@@ -15,10 +43,24 @@ class PayPalController{
         });
     }
     callback(req, res){
-        res.status(200).send('callback')
+        const { paymentId, PayerID } = req.query;
+        res.render('confirmacao', {paymentId, PayerID})
     }
     cancel(req, res){
         res.status(200).send('cancel')
+    }
+    
+    confirm(req, res){
+        const { paymentId, PayerID } = req.body;
+        console.log(paymentId)
+        console.log(PayerID)
+        paypal.payment.execute(paymentId, { payer_id: PayerID }, (error, payment) => {
+             if (error) {
+                res.status(error.httpStatusCode).send(error.response);
+            } else {
+                res.render('pagamentoConcluido');
+            }
+        })
     }
 }
 
