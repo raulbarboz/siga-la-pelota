@@ -498,3 +498,7 @@ body {
 .navbar{
   z-index: 999999999;
 }
+
+.meta-box__prevista h3{
+  text-align:right;
+}

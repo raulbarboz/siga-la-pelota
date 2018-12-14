@@ -1,17 +1,22 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const ejs = require('ejs');
-require('dotenv').config();
 const firebase = require('firebase');
 const Auth = require('./firebase.js');
 const bodyParser = require('body-parser');
 var device = require('express-device');
 app.use(device.capture());
 
-//let IP = process.env.IP || 'localhost';
+let IP = process.env.IP || 'localhost';
 let PORT = process.env.PORT || 8080;
+
+const PayPalController = require('./controllers/PayPalController');
+const ColaboreController = require('./controllers/ColaboreController')
+
 
 
 var publicDir = require('path').join(__dirname,'/public');
@@ -224,6 +229,11 @@ app.get('/excluir', (req, res) => {
   }
 })
 
+app.get('/colabore', ColaboreController.request)
+app.get('/paypal', PayPalController.request)
+app.get('/cancel', PayPalController.cancel)
+app.get('/callback', PayPalController.callback)
+
 io.on('connection', function(socket){
    socket.on('sent message', function(msg){
     Auth.insertMessage(msg)
@@ -231,5 +241,5 @@ io.on('connection', function(socket){
 });
 
 http.listen(PORT, function(){
-    
+    console.log(`App running on ${IP}/${PORT}`)
 });

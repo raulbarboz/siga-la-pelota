@@ -1,0 +1,84 @@
+
+ <%- include('partials/header') %>
+ <%- include('partials/navbar') %>
+
+<body>
+    <div class="container">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+          <h1 class="display-4">Contamos com a sua colaboração!</h1>
+          <p class="lead">Como todos sabemos, o <em>Bloco de Carnaval</em> de rua <em>SigaLaPelota</em>, é um grupo que se destina a alegrar os corações. </p>
+          <p class="lead">E de uma maneira totalmente divertida e <em>sem fins lucrativos</em> reune amigos e familiares neste encontro maravilhoso que é o carnaval. Preservando e promovendo a nossa cultura ano após ano. </p>
+          <p class="lead">Com o intuito de arcar com os custos desse evento, estamos pedindo e contando com a ajuda de quem se sentir confortável em ajudar.</p>
+        </div>
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Quero Ajudar</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">R$10</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Muito Obrigado</li>
+              <li>Que amor</li>
+              <li>Vem nos ver</li>
+              <li>Ótimo</li>
+            </ul>
+            <form action="/paypal" method="get">
+            <button id="button_10" type="submit" class="btn btn-lg btn-block btn-outline-primary">R$10</button>
+            </form>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Vou Ajudar</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">R$50</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>R$50 Reais</li>
+              <li>É por uma boa causa</li>
+              <li>Viva o SigaLaPelota</li>
+              <li>Será Legal!</li>
+            </ul>
+            <form>
+            <button id="button_50" type="button" class="btn btn-lg btn-block btn-primary">R$50</button>
+            </form>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Estou Ajudando</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">R$100</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Muito Gratos</li>
+              <li>Obrigado</li>
+              <li>Gracias</li>
+              <li>Contamos com a sua presença!</li>
+            </ul>
+            <button id="button_100" type="button" class="btn btn-lg btn-block btn-primary">R$100</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="meta-box">
+            <h1>Já alcançamos...</h1>
+            <div class="">
+                <span class="meta-box__prevista"><h3>R$ 3.000,00</h3></span>
+            </div>
+            <div class="progress" style="height: 50px;">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">R$ 500,00</div>
+            </div>
+        </div>
+        <div class="colaboradores-box">
+            Alfa, Beta, Gama, Jorge, ...
+        </div>
+      </footer>
+    </div>
+</body>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</html>

@@ -22,6 +22,7 @@
     "jquery": "^3.3.1",
     "mobile-detect": "^1.4.3",
     "moment": "^2.22.2",
+    "paypal-rest-sdk": "^1.8.1",
     "popper": "^1.0.1",
     "socket.io": "^2.1.1"
   },
