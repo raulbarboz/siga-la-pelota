@@ -1,4 +1,4 @@
-const { IP, PORT } = process.env;
+const { HOST, PORT } = process.env;
 
 module.exports = {
     "intent": "sale",
@@ -6,8 +6,8 @@ module.exports = {
         "payment_method": "paypal"
     },
     "redirect_urls": {
-        "return_url": `http://${IP}:${PORT}/callback`,
-        "cancel_url": `http://${IP}:${PORT}/cancel`
+        "return_url": `http://${HOST}:${PORT}/callback`,
+        "cancel_url": `http://${HOST}:${PORT}/cancel`
     },
     "transactions": [{
         "item_list": {

@@ -6,10 +6,10 @@ class PayPalController{
     request(req, res){
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
-                throw error;
+                res.status(error.httpStatusCode).send(error.response);
             } else {
                 const approval_url = payment.links;
-                const link = approval_url.find((link) => {return link.rel === 'approval_url' }).href
+                const link = approval_url.find((link) => { return link.rel === 'approval_url' }).href
                 res.redirect(link)
             }
         });
