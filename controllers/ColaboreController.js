@@ -7,7 +7,7 @@ class ColaboreController {
                 return prevVal + parseInt(elem.amount);
             }, 0 );
             let total = (sum*100)/3000;
-            res.render('colabore', {total});
+            res.render('colabore', {total, sum});
         })
         
     }
