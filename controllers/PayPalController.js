@@ -53,14 +53,16 @@ class PayPalController{
         res.render('confirmacao', {paymentId, PayerID})
     }
     cancel(req, res){
-        res.status(200).send('cancel')
+        res.status(200).send('Você cancelou a operação')
     }
     
     confirm(req, res){
         const { paymentId, PayerID } = req.body;
         paypal.payment.execute(paymentId, { payer_id: PayerID }, (error, payment) => {
              if (error) {
-                res.status(error.httpStatusCode).send(error.response);
+                Auth.insertPaymentError(paymentId, error.response).then(() => {
+                    res.status(error.httpStatusCode).send(error.response);
+                })
             } else {
                 Auth.approvePayment(paymentId).then(() => {
                     res.render('pagamentoConcluido');

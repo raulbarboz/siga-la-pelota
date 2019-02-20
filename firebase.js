@@ -184,6 +184,13 @@ module.exports.insertPayment = (id, amount) => {
   })
 }
 
+module.exports.insertPaymentError = (id, error) => {
+  return firebase.database().ref('paymentError').child(id).set({
+    id,
+    error
+  })
+}
+
 module.exports.approvePayment = (id) => {
   return firebase.database().ref(`payments/${id}`).update({
     approved: true
