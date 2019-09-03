@@ -18,9 +18,17 @@
 	top: 0;
 	color: #fff;
 }
-.vid-info { position: absolute; top: 70px; right: 10px; width: 33%; background: rgba(0,0,0,0.3); color: #fff; padding: 1rem; font-family: Avenir, Helvetica, sans-serif; }
+.vid-info { position: absolute; top: 70px; right: 10px; width: 33%; background: rgba(255, 255, 255, 0.75);  color: #313131c7; padding: 1rem; font-family: 'Lato', sans-serif; font-weight: 600; }
 .vid-info h1 { font-size: 2rem; font-weight: 700; margin-top: 0; line-height: 1.2; }
 .vid-info a { display: block; color: #fff; text-decoration: none; background: rgba(0,0,0,0.5); transition: .6s background; border-bottom: none; margin: 1rem auto; text-align: center; }
+.vid-info img{
+  width:150px;
+  margin: 0 auto
+}
+
+.description{
+  text-align: justify;
+}
 @media (min-aspect-ratio: 16/9) {
   .video-foreground { height: 300%; top: -100%; }
 }
@@ -205,7 +213,7 @@ body {
 
 /* Conversation */
 .conversation-container {
-  max-height:300px;
+  max-height: calc(100vh - 265px);
 }
 
 .conversation {
